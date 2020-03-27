@@ -32,11 +32,6 @@ void minPath::getMinimumPath(){
     }
     for (unsigned int i = 0; i < graph.size(); i++){
         if (graph[i].start == first){   //находим начальную вершину
-            if (graph[i].end == last){  //если сосед конечная вершина то заканчиваем алгоритм
-                std::cout << graph[i].start << "->" << last << " it's end!!!" << std::endl;
-                checkedPath.push(last);
-                return;
-            }
             if (graph[i].length < minL && !(graph[i].checked)){ //находим оптимального соседа
                 minL = graph[i].length;
                 minI = i;
@@ -53,6 +48,11 @@ void minPath::getMinimumPath(){
         return;
     }
     std::cout << first << "->" << graph[minI].end << " it's optimal" << std::endl;
+    if (graph[minI].end == last){  //если сосед конечная вершина то заканчиваем алгоритм
+        std::cout << graph[minI].start << "->" << last << " it's end!!!" << std::endl;
+        checkedPath.push(last);
+        return;
+    }
     graph[minI].checked = true;
     first = graph[minI].end;    //теперь оптимальный сосед является начальной вершиной
     getMinimumPath();
