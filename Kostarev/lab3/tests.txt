@@ -1,0 +1,60 @@
+7
+a
+c
+a b 3
+b c 2
+a c 5
+b d 8
+a d 6
+d e 4
+e c 1
+
+7
+a
+f
+a b 7
+a c 6
+b d 6
+c f 9
+d e 3
+d f 4
+e c 2
+
+7
+a 
+e
+a b 5
+b c 4
+c d 6
+d e 1
+a e 3
+b d 2
+a d 2
+
+7
+a
+e
+a b 7
+b c 5
+c d 8
+d b 10
+c e 9
+d e 5
+b e 8
+
+2
+a
+c
+a b 4
+c b 1
+
+7
+a
+d
+a b 100
+b d 100
+d b 60
+b c 70
+c b 100
+c d 100
+d c 50
