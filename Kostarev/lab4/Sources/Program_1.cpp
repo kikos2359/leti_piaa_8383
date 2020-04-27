@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <windows.h>
+//#include <windows.h>
 
 void printArray(std::vector<int>& arr){
     for (unsigned int i = 0; i < arr.size() - 1; i++) {
@@ -10,7 +10,7 @@ void printArray(std::vector<int>& arr){
     std::cout << arr[arr.size() - 1];
 }
 
-void prefixFunc(std::string p, std::vector<int>& prefixes){ //вычисление префикс-ф для образца
+void prefixFunc(std::string &p, std::vector<int>& prefixes){ //вычисление префикс-ф для образца
     std::cout << "Вычисление префикс-ф p для образца P = " << p << std::endl;
     std::cout << " p[0] = 0" << std::endl;
     for (unsigned int index = 1; index < p.size(); index++){    //проход по каждому символу строки кроме первого
@@ -30,12 +30,9 @@ void prefixFunc(std::string p, std::vector<int>& prefixes){ //вычислени
     }
 }
 
-std::vector<int> KMPFunc(){     //алгоритм
-    std::string p;  //образец
-    char c;     //символ текста
+std::vector<int> KMPFunc(std::string &p){     //алгоритм
     std::vector<int> answer;    //индексы вхождений образца в тексте
     std::vector<int> prefixes;  //префикс-ф образца
-    std::cin >> p;
     prefixes.push_back(0);  //пушаем значение для первого символа образца
     prefixFunc(p, prefixes);    //находим остальные значения
     std::cout << "Префикс-ф для образца равна [";
@@ -43,8 +40,8 @@ std::vector<int> KMPFunc(){     //алгоритм
     std::cout << "]" << std::endl;
     int indexT = 0;     //индекс символа в тексте
     int indexP = 0;     //индекс символа в образце и значение префикс-ф
-    std::cin.get();     //пропускаем enter
     std::cout << "Начинаем поиск, посимвольно обрабатывая строку, indexP = 0" << std::endl;
+    char c;     //символ текста
     while (std::cin.get(c)){    //считывание символов текста
         if (c == '\n' || c == EOF) break;
         std::cout << " T[" << indexT << "] = " << c << ":" << std::endl;
@@ -70,8 +67,12 @@ std::vector<int> KMPFunc(){     //алгоритм
 }
 
 int main() {
-    SetConsoleOutputCP(CP_UTF8);
-    std::vector<int> answer = KMPFunc();    //массив индексов вхождений
+    setlocale(LC_ALL, "RUS");
+    //SetConsoleOutputCP(CP_UTF8);
+    std::string p;  //образец
+    std::cin >> p;
+    std::cin.get();     //пропускаем enter
+    std::vector<int> answer = KMPFunc(p);    //массив индексов вхождений
     if (answer.empty()){    //массив пустой значит вхождений нет
         std::cout << "-1";
     } else{ //печать в требуемом виде

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <windows.h>
+//#include <windows.h>
 
 void printArray(std::vector<int>& arr){
     for (unsigned int i = 0; i < arr.size() - 1; i++) {
@@ -30,12 +30,8 @@ void prefixFunc(std::string b, std::vector<int>& prefixes){ //вычислени
     }
 }
 
-int KMPFunc(){
-    std::string a;  //A
-    std::string b;  //B
+int KMPFunc(std::string &a, std::string &b){
     std::vector<int> prefixes;  //префикс-ф строки B
-    std::cin >> a;
-    std::cin >> b;
     if (a.size() != b.size()){   //если строки с разными длинами то они не цикл сдвиг
         std::cout << "Строки не равны по длине" << std::endl;
         return -1;
@@ -70,7 +66,12 @@ int KMPFunc(){
 }
 
 int main() {
-    SetConsoleOutputCP(CP_UTF8);
-    std::cout << KMPFunc();
+    setlocale(LC_ALL, "RUS");
+    //SetConsoleOutputCP(CP_UTF8);
+    std::string a;  //A
+    std::string b;  //B
+    std::cin >> a;
+    std::cin >> b;
+    std::cout << KMPFunc(a, b);
     return 0;
 }
