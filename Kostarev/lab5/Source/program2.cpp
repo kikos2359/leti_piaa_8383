@@ -59,7 +59,7 @@ void addString(std::string& str, Trie& trie, int count){
         if (trie[index].neighbours[curr] == -1){        // если нет ребра по символу
             trie.push_back(makeNode(index, str[i]));
             trie[index].neighbours[curr] = trie.size() - 1;
-            std::cout << "\tcreate node for transition: " << index << "--" << str[i] << "->" << trie.size()-1 << std::endl;
+            std::cout << "Create node for transition: " << index << "--" << str[i] << "->" << trie.size()-1 << std::endl;
         }
         index = trie[index].neighbours[curr];
     }
@@ -131,9 +131,10 @@ void checkUpLink(int c[], int vert, int index, Trie& trie, std::string& text, Te
                 int tmp = index + 1 - templ[in].size() - positions[in];
                 if (tmp >= 0 && tmp <= text.length() - wordLength){
                     c[tmp]++;
-                    std::cout << "\tNode " << i << " is terminal, at pos " << index-templ[in].length()+1 << " find: " << templ[in] << std::endl;
+                    std::cout << "Node " << i << " is terminal, at pos " << index-templ[in].length()+1 << " find: " << templ[in] << std::endl;
                 }
             }
+
         }
     }
 }
@@ -147,11 +148,16 @@ void processText(int c[], std::string& text, Trie& trie, Template& templ, Positi
     }
     std::cout << "\nResult: " << std::endl;
     int num = 0;
+    int flag = 0;
     for (int i = 0; i < text.size(); i++){
         if (c[i] == templ.size()){
+            flag = 1;
             std::cout << i+1 << std::endl;
             num++;
         }
+    }
+    if (!flag){
+        std::cout << "No." << std::endl;
     }
 }
 
@@ -199,23 +205,25 @@ int main(){
     initTrie(trie);
     splitString(word, templ, positions, joker);
     int i = 0;
-    std::cout << "\n START Fill trie:" << std::endl;
+    std::cout << std::endl;
+    std::cout << "------------------------" << std::endl;
     for (auto& buff: templ){
         addString(buff, trie, i++);
     }
-    std::cout << "END Fill trie." << std::endl;
+    std::cout << "------------------------" << std::endl;
     int c[text.size()] = {0};
-    std::cout << "Count of nodes: " << trie.size() << std::endl;
-    std::cout << "Parts of pattern without joker " << joker << std::endl;
+    std::cout << "Parts of pattern without joker: " << joker << std::endl;
     for (auto& buff: templ){
         std::cout << "\t" << buff << std::endl;
     }
-    std::cout << "Array of starts positions for parts" << std::endl;
+    std::cout << "------------------------" << std::endl;
+    std::cout << "Array of starts positions for parts:" << std::endl;
     for (auto& buff: positions){
         std::cout << " " << buff;
     }
-    std::cout << "\nSTART Proccesing text" << std::endl;
+    std::cout << std::endl;
+    std::cout << "------------------------" << std::endl;
     processText(c,text, trie, templ, outPositions, positions);
-    std::cout << "END Proccesing text" << std::endl;
+    std::cout << "Count of nodes: " << trie.size() << std::endl;
     return 0;
 }

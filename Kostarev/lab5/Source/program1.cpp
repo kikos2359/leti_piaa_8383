@@ -168,6 +168,9 @@ int main(){
     processText(text, trie, templ, output);
     std::cout << "END Proccesing text" << std::endl;
     std::sort(output.begin(), output.end(), compare);
+    if (output.empty()){
+        std::cout << "No." << std::endl;
+    }
     for (auto &curr: output){
         std::cout << curr.first << " " << curr.second << std::endl;
     }
